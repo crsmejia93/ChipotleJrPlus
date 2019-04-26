@@ -5,8 +5,9 @@ import java.util.Random;
 
 public class Main {
     /*
-    * This program will assemble 25 burritos by using a random number and selecting from the
+    * This program will assemble 25 burritos by using a random number and selecting from
     * an array of ingredients: Rice, Meat, Beans, Salsa, Veggies, Cheese, Guac, Sour Cream.
+    * It will then calculate the pricing and out put it under the burrito line with all its ingredients.
     * */
 
     public static void main(String[] args) {
@@ -19,10 +20,10 @@ public class Main {
         String[] veggies = {"Lettuce", "Fajita veggies", "No Veggies", "All Veggies"};
         //The burrito that will hold the ingredients
         HashMap<String, String> burritos = new HashMap<>();
-        for (int i = 0; i <= QUANTITY; i++) {
+        for (int i = 0; i < QUANTITY; i++) {
             //This random will be used to produce a random true or false
             Random random = new Random();
-            //The lines 27 to 31 will add all the ingredients into the string ingredients.
+            //The lines 27 to 31 will add(concatenate) all the ingredients into the string ingredients.
             String tempStr = "", ingredients;
             ingredients = tempStr.concat(addRice(rice));
             ingredients += tempStr.concat(", " + addMeat(meat));
@@ -44,8 +45,8 @@ public class Main {
             burritos.put("Burrito" + i, ingredients);
         }
         double total;
-        for (int i = 0; i < burritos.size() - 1; i++) {
-            //This passes each value according to the key being passed to the get()
+        for (int i = 0; i < burritos.size(); i++) {
+            //This passes each String value according to the String key being passed to the get()
             total = getTotal(burritos.get("Burrito" + i));
             System.out.printf("Burrito %d: %s\n Total: $%.2f\n", i + 1, burritos.get("Burrito" + i),total);
         }
