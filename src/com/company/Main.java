@@ -31,7 +31,8 @@ public class Main {
             ingredients += tempStr.concat(", "+addBeans(beans));
             ingredients += tempStr.concat(", "+addSalsa(salsa));
             ingredients += tempStr.concat(", "+addVeggies(veggies));
-            //The ingredients will be stored into the HashMap burritos
+            //This section will randomly add additional ingredient/toppings by
+            //by gettting random true or false values
             if(getRandomBoolean(random)){
                 ingredients +=tempStr.concat(", Cheese");
             }
@@ -41,6 +42,7 @@ public class Main {
             if(getRandomBoolean(random)){
                 ingredients +=tempStr.concat(", Sour Cream");
             }
+            //The ingredients will be stored into the HashMap burritos
             burritos.put("Burrito"+i,ingredients);
         }
         for(int i=0; i<burritos.size()-1;i++){
