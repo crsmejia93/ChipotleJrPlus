@@ -2,7 +2,6 @@ package com.company;
 
 import java.util.HashMap;
 import java.util.Random;
-import java.util.Scanner;
 
 public class Main {
     /*
@@ -11,45 +10,119 @@ public class Main {
     * */
 
     public static void main(String[] args) {
-        final int QUANTITY =25;//The number of burritos that will be made
-        Scanner input = new Scanner(System.in);
+        final int QUANTITY = 25;//The number of burritos that will be made
         //INGREDIENTS
         String[] rice = {"White Rice", "Brown Rice", "No Rice"};
-        String[] meat = {"Chicken", "Steak", "Carnitas", "Chorizo", "Sofritas","Veggies"};
-        String[] beans = {"Pinto Beans", "Black Beans","No Beans"};
+        String[] meat = {"Chicken", "Steak", "Carnitas", "Chorizo", "Sofritas", "Veggies"};
+        String[] beans = {"Pinto Beans", "Black Beans", "No Beans"};
         String[] salsa = {"Mild Salsa", "Medium Salsa", "Hot Salsa", "All Salsas", "No Meat"};
         String[] veggies = {"Lettuce", "Fajita veggies", "No Veggies", "All Veggies"};
         //The burrito that will hold the ingredients
         HashMap<String, String> burritos = new HashMap<>();
-        for(int i = 0; i<=QUANTITY; i++){
+        for (int i = 0; i <= QUANTITY; i++) {
             //This random will be used to produce a random true or false
             Random random = new Random();
             //The lines 27 to 31 will add all the ingredients into the string ingredients.
-            String tempStr ="", ingredients;
+            String tempStr = "", ingredients;
             ingredients = tempStr.concat(addRice(rice));
-            ingredients += tempStr.concat(", "+addMeat(meat));
-            ingredients += tempStr.concat(", "+addBeans(beans));
-            ingredients += tempStr.concat(", "+addSalsa(salsa));
-            ingredients += tempStr.concat(", "+addVeggies(veggies));
+            ingredients += tempStr.concat(", " + addMeat(meat));
+            ingredients += tempStr.concat(", " + addBeans(beans));
+            ingredients += tempStr.concat(", " + addSalsa(salsa));
+            ingredients += tempStr.concat(", " + addVeggies(veggies));
             //This section will randomly add additional ingredient/toppings by
             //by gettting random true or false values
-            if(getRandomBoolean(random)){
-                ingredients +=tempStr.concat(", Cheese");
+            if (getRandomBoolean(random)) {
+                ingredients += tempStr.concat(", Cheese");
             }
-            if(getRandomBoolean(random)){
-                ingredients +=tempStr.concat(", Guacamole");
+            if (getRandomBoolean(random)) {
+                ingredients += tempStr.concat(", Guacamole");
             }
-            if(getRandomBoolean(random)){
-                ingredients +=tempStr.concat(", Sour Cream");
+            if (getRandomBoolean(random)) {
+                ingredients += tempStr.concat(", Sour Cream");
             }
             //The ingredients will be stored into the HashMap burritos
-            burritos.put("Burrito"+i,ingredients);
+            burritos.put("Burrito" + i, ingredients);
         }
-        for(int i=0; i<burritos.size()-1;i++){
-            System.out.printf("Burrito %d: %s\n",i+1,burritos.get("Burrito"+i));
+        double total;
+        for (int i = 0; i < burritos.size() - 1; i++) {
+            //This passes each value according to the key being passed to the get()
+            total = getTotal(burritos.get("Burrito" + i));
+            System.out.printf("Burrito %d: %s\n Total: $%.2f\n", i + 1, burritos.get("Burrito" + i),total);
         }
     }
-    //METHODS----------------------------------------------------------------------------------
+    //METHODS----------------------------------------------------------------------------------//
+    private static double getTotal(String ingredients) {
+        double Total=3.00;//initial price for the burrito
+        //This iterates through each ingredient and adds the cost accordingly
+        for(String ingredient: ingredients.split(", ")){
+            switch (ingredient){
+                case "White Rice":
+                    Total+=.50;
+                    break;
+                case "Brown Rice":
+                    Total+=.50;
+                    break;
+                case "Chicken":
+                    Total+=.50;
+                    break;
+                case "Steak":
+                    Total+=.50;
+                    break;
+                case "Carnitas":
+                    Total+=.50;
+                    break;
+                case "Chorizo":
+                    Total+=.50;
+                    break;
+                case "Sofritas":
+                    Total+=.50;
+                    break;
+                case "Veggies":
+                    Total+=.50;
+                    break;
+                case "Pinto Beans":
+                    Total+=.50;
+                    break;
+                case "Black Beans":
+                    Total+=.50;
+                    break;
+                case "Mild Salsa":
+                    Total+=.50;
+                    break;
+                case "Medium Salsa":
+                    Total+=.50;
+                    break;
+                case "Hot Salsa":
+                    Total+=.50;
+                    break;
+                case "All Salsas":
+                    Total+=1.50;
+                    break;
+                case "Lettuce":
+                    Total+=.50;
+                    break;
+                case "Fajita veggies":
+                    Total+=.50;
+                    break;
+                case "All Veggies":
+                    Total+=1.50;
+                    break;
+                case "Cheese":
+                    Total+=.50;
+                    break;
+                case "Guacamole":
+                    Total+=.50;
+                    break;
+                case "Sour Cream":
+                    Total+=.50;
+                    break;
+                default:
+                    Total+=0;
+            }//end switch
+        }//end for-loop
+        return Total;
+    }
+
     private static boolean getRandomBoolean(Random random){
         //This is a simplified if statement
         //I found the formula on StackOverFlow
